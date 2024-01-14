@@ -74,6 +74,51 @@ app.post("/addsubj", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+// app.post("/addmarks", async (req, res) => {
+//     try {
+//         let { subjectcode, studentId, marksObtained } = req.body;
+
+//         // Find the student by studentId
+//         const student = await Student.findOne({
+//             studentId: req.body.studentId,
+//         });
+
+//         if (student) {
+//             // Update totalmarks by adding the new marksObtained value
+//             student.totalmarks += parseFloat(marksObtained);
+//             student.percentage = parseFloat(student.totalmarks/student.marks.length);
+//         }
+
+//         // Save the changes to the totalmarks field
+//         await student.save();
+
+//         // Define the update filter based on subject code and studentId
+//         const filter = {
+//             "marks.$.subjectcode": subjectcode,
+//             studentId: studentId,
+//         };
+
+//         // Define the update
+
+//         const update = { $set: { "marks.$.marksObtained": marksObtained } };
+
+
+//         // Perform the update for documents that match the filter
+//         const result = await Student.updateOne(filter, update);
+
+//         if (result.matchedCount === 0) {
+//             res.status(404).render("addmarks",{message: `Student with subject code '${subjectcode}' and studentId '${studentId}' not found.`,
+//         })
+//         } else {
+//             res.status(200)("addmarks",{message: `Student with subject code '${subjectcode}' and studentId '${studentId}' not found.`,
+//         })
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// });
+
 app.post("/addmarks", async (req, res) => {
     try {
         let { subjectcode, studentId, marksObtained } = req.body;
@@ -94,13 +139,13 @@ app.post("/addmarks", async (req, res) => {
 
         // Define the update filter based on subject code and studentId
         const filter = {
-            "marks.$.subjectcode": subjectcode,
+            "marks.subjectcode": subjectcode,
             studentId: studentId,
         };
 
         // Define the update
         const update = {
-            $push: {
+            $set: {
                 "marks.$.marksObtained": marksObtained,
             },
         };
@@ -109,11 +154,11 @@ app.post("/addmarks", async (req, res) => {
         const result = await Student.updateOne(filter, update);
 
         if (result.matchedCount === 0) {
-            res.status(404).render("addmarks",{message: `Student with subject code '${subjectcode}' and studentId '${studentId}' not found.`,
-        })
-        } else {
-            res.status(200)("addmarks",{message: `Student with subject code '${subjectcode}' and studentId '${studentId}' not found.`,
-        })
+                        res.status(404).render("addmarks",{message: `Student with subject code '${subjectcode}' and studentId '${studentId}' not found.`,
+                    }) }
+                    else {
+            res.status(404).render("addmarks",{message: `Student with subject code '${subjectcode}' and studentId '${studentId}' marks updated.`,
+        });
         }
     } catch (error) {
         console.error(error);
