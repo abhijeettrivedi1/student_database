@@ -94,13 +94,13 @@ app.post("/addmarks", async (req, res) => {
 
         // Define the update filter based on subject code and studentId
         const filter = {
-            "marks.subjectcode": subjectcode,
+            "marks.$.subjectcode": subjectcode,
             studentId: studentId,
         };
 
         // Define the update
         const update = {
-            $set: {
+            $push: {
                 "marks.$.marksObtained": marksObtained,
             },
         };
