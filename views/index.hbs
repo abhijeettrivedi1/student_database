@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            position: relative;
+            background-image: url('https://infopeedia.com/wp-content/uploads/2022/08/ElO-XOfU0AEeZi6-scaled.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0; /* Remove default margin */
+            height: 100vh; /* Set height to 100% of viewport */
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7); /* Adjust the alpha value for the desired level of transparency */
+        }
+
+        .content {
+            position: fixed;
+            padding: 18px;
+            margin: 4px;
+            top: 100px;
+            left: 240px; /* Adjust the left margin as needed */
+            width: 600px; /* Increase the width as needed */
+            border: 2px solid #61b81e;
+            border-radius: 25px;
+            box-shadow: 3px 5px #61b81e;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for the desired level of transparency */
+        }
+
+        font {
+            font-size: 24px;
+            color: #61b81e;
+        }
+
+        form {
+            font-size: 18px;
+        }
+        .content input[type="number"],
+        .content input[type="text"],
+        .content input[type="email"],
+        .content input[type="password"] {
+            height: 30px;
+            width: 450px;
+            box-sizing: border-box;
+            border: 1px solid #2E37FE;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .content input::placeholder {
+            color: #CCC;
+            font-size: 18px;
+        }
+
+        textarea {
+            font-size: 16px;
+            width: 440px;
+        }
+
+        select {
+            width: 140px;
+            height: 25px;
+        }
+
+        .content input[type="submit"],
+        .content input[type="reset"] {
+            font-size: 20px;
+            text-align: center;
+            float: center;
+            padding: 8px;
+            width: 120px;
+            border: 1px solid #61b81e;
+            border-radius: 20px;
+            background-color: white;
+            color: ##61b81e;
+            cursor: pointer;
+        }
+
+        .content input[type="submit"]:hover,
+        .content input[type="reset"]:hover {
+            color: white;
+            background-color: #61b81e;
+        }
+        button {
+            background-color: #61b81e;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #195138;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    {{>navbar}}
+    <div class="content">
+        <font><b>Student Registration</b></font><br><br>
+        <form action="/register" method="POST" >
+            <b>Name</b><br>
+            <input type="text" name="name" placeholder="Your name" required><br><br>
+
+            <b>Batch</b><br>
+            <input type="text" name="email" placeholder="Your Batch" required><br><br>
+
+            <b>Registeration No</b><br>
+            <input type="text" name="studentId" placeholder="Registeration No" required><br><br>
+
+            <b>Current Semester</b><br>
+            <input type="number" name="CurrentSem" placeholder="Your current semester" required><br><br>
+
+            <b>Branch</b><br>
+            <input type="text" name="branch" placeholder="Your branch" required><br><br>
+
+            <button style="border-radius: 5px;" type="submit" name="submit" value="Register">Submit</button>
+            <input type="reset" name="reset" value="Cancel" onclick="myFunction()">
+        </form>
+        {{#if message}}
+        <p>{{message}}</p>
+        {{/if}}
+    </div>
+
+    <script type="text/javascript">
+        function myFunction() {
+            alert("Registration Cancelled!");
+        }
+
+       
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
